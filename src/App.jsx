@@ -28,7 +28,7 @@ import AddPackage from "./pages/Admin/AddPackage";
 import UpdatePackage from "./pages/Admin/UpdatePackage";
 import SignUp from "./pages/Auth/SignUp";
 import Login from "./pages/Auth/Login";
-import User from "./pages/user";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -90,7 +90,7 @@ function Layout() {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/user" element={<User />} />
+      
 
         {/* Admin Routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
