@@ -13,7 +13,7 @@ const AddPackage = () => {
     image: "",
   });
   const [loading, setLoading] = useState(false);
-  const apiUrl = "https://the-inceptioners-backend.vercel.app/api/admin/package"; // Adjust based on your backend
+  const apiUrl = `${import.meta.env.VITE_BACKEND_URL}/api/admin/package`; // Adjust based on your backend
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {

@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import PackageCard from "../components/PackageCard";
-
+import { useApi } from "../context/ApiContext";
 const Packages = () => {
   const [packages, setPackages] = useState([]);
   const [loading, setLoading] = useState(true); // New loading state
-
+  const api = useApi();
   useEffect(() => {
     const fetchPackages = async () => {
       try {
-        const response = await axios.get(
-          `https://the-inceptioners-backend.vercel.app/api/packages/`
-        );
+        const response = await api.get(`/packages/`);
+
         console.log("API Response:", response.data); // Log the API response
         setPackages(response.data);
         setLoading(false); // Set loading to false once data is fetched

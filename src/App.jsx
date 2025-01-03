@@ -1,10 +1,20 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import React, { useContext } from "react"; // Import useContext
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
 import { AdminProvider } from "./context/AdminContext";
+import { UserProvider } from "./context/UserContext";
+import { ApiProvider } from "./context/ApiContext";
+import { UserContext } from "./context/UserContext"; // Import UserContext
 import Navbar from "./components/Navbar";
+import Footer from "./pages/Footer";
 import Home from "./pages/Home";
 import ViewBookings from "./pages/Admin/ViewBookings";
-import UserBookings from "./pages/BookNow"; // Regular user bookings page
+import UserBookings from "./pages/BookNow";
 import InvoicePage from "./pages/InvoicePage";
 import PackageDetails from "./pages/PackageDetails";
 import BookNow from "./pages/BookNow";
@@ -14,11 +24,21 @@ import Admin from "./pages/Admin/Admin";
 import Packages from "./pages/Packages";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
-import Footer from "./pages/Footer";
 import AddPackage from "./pages/Admin/AddPackage";
 import UpdatePackage from "./pages/Admin/UpdatePackage";
+import SignUp from "./pages/Auth/signup";
+import Login from "./pages/Auth/Login";
+import User from "./pages/user";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-// Wrapper component for location-based footer rendering
+// PrivateRoute Component for protecting routes
+const PrivateRoute = ({ children }) => {
+  const { isUserLoggedIn } = useContext(UserContext); // Use useContext to access UserContext
+
+  return isUserLoggedIn ? children : <Navigate to="/" />;
+};
+
 function Layout() {
   const location = useLocation();
 
@@ -27,17 +47,50 @@ function Layout() {
 
   return (
     <>
+      <ToastContainer />
       <Navbar />
       <Routes>
         {/* Regular User Routes */}
         <Route path="/" element={<Home />} />
-        <Route path="/bookings" element={<UserBookings />} />
+        <Route
+          path="/bookings"
+          element={
+            <PrivateRoute>
+              <UserBookings />
+            </PrivateRoute>
+          }
+        />
         <Route path="/invoice" element={<InvoicePage />} />
-        <Route path="/packages" element={<Packages />} />
+        <Route
+          path="/packages"
+          element={
+            <PrivateRoute>
+              <Packages />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/packages/:id"
+          element={
+            <PrivateRoute>
+              <PackageDetails />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="/packages/:id/booknow"
+          element={
+            <PrivateRoute>
+              <BookNow />
+            </PrivateRoute>
+          }
+        />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/contact" element={<ContactUs />} />
-        <Route path="/packages/:id" element={<PackageDetails />} />
-        <Route path="/packages/:id/booknow" element={<BookNow />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/user" element={<User />} />
 
         {/* Admin Routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
@@ -59,9 +112,13 @@ function Layout() {
 function App() {
   return (
     <AdminProvider>
-      <Router>
-        <Layout />
-      </Router>
+      <UserProvider>
+        <ApiProvider>
+          <Router>
+            <Layout />
+          </Router>
+        </ApiProvider>
+      </UserProvider>
     </AdminProvider>
   );
 }

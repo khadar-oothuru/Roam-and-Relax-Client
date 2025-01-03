@@ -1,20 +1,27 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AdminContext } from "../context/AdminContext";
+import { UserContext } from "../context/UserContext";
+import { MdWavingHand } from "react-icons/md";
+import { LiaPrayingHandsSolid } from "react-icons/lia";
 
 const Navbar = () => {
-  const { isAdminLoggedIn, logout } = useContext(AdminContext);
+  const { isUserLoggedIn, username, profileImage, logout } =
+    useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-    navigate("/"); // Redirect to the homepage or desired location after logout
+    navigate("/"); // Redirect to homepage after logout
   };
+
+  useEffect(() => {
+    // Any necessary logic when isUserLoggedIn, username, or profileImage changes
+  }, [isUserLoggedIn, username, profileImage]);
 
   return (
     <div
-      className="navbar bg-[#001337] shadow-md px-8 py-5 sticky top-0 z-50"
-      style={{ height: "5rem" }}
+      className="navbar bg-white shadow-md px-6 py-3 sticky top-0 z-50"
+      style={{ height: "4rem" }}
     >
       <div className="navbar-start">
         {/* Hamburger Menu for Small Devices */}
@@ -26,7 +33,7 @@ const Navbar = () => {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-white"
+              className="h-6 w-6 text-gray-800"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -39,12 +46,11 @@ const Navbar = () => {
               />
             </svg>
           </button>
-          {/* Dropdown Content */}
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content absolute z-50 bg-[#001337] text-white rounded-box mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content absolute z-50 bg-white text-gray-800 rounded-box mt-3 w-52 p-2 shadow"
           >
-            {!isAdminLoggedIn && (
+            {!isUserLoggedIn ? (
               <>
                 <li>
                   <Link to="/" className="hover:text-[#ff7c5b] text-lg">
@@ -61,29 +67,20 @@ const Navbar = () => {
                     Contact Us
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    to="/admin/login"
-                    className="hover:text-[#ff7c5b] text-lg"
-                  >
-                    Admin Login
-                  </Link>
-                </li>
               </>
-            )}
-            {isAdminLoggedIn && (
+            ) : (
               <>
                 <li>
-                  <Link to="/admin" className="hover:text-[#ff7c5b] text-lg">
-                    View All Packages
+                  <Link to="/profile" className="hover:text-[#ff7c5b] text-lg">
+                    Profile
                   </Link>
                 </li>
                 <li>
                   <Link
-                    to="/admin/dashboard/bookings"
+                    to="/dashboard"
                     className="hover:text-[#ff7c5b] text-lg"
                   >
-                    Bookings
+                    Dashboard
                   </Link>
                 </li>
                 <li>
@@ -100,24 +97,24 @@ const Navbar = () => {
         </div>
 
         {/* Logo */}
-        <Link to="/" className="text-xl font-bold permanent-marker-regular text-white">
-          <span>Travel</span>{" "}
-          <span className="text-[#ff7c5b]">
-            Agency{" "}
-
-          </span>
+        <Link
+          to="/"
+          className="text-lg font-bold permanent-marker-regular text-gray-800"
+        >
+          <span>Roam</span> <span className="text-[#ff7c5b]">&</span>{" "}
+          <span>Relax</span>
         </Link>
       </div>
 
       {/* Center Menu for Large Devices */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
-          {!isAdminLoggedIn && (
+          {!isUserLoggedIn ? (
             <>
               <li>
                 <Link
                   to="/"
-                  className="hover:text-[#ff7c5b] text-lg text-white"
+                  className="hover:text-[#ff7c5b] text-lg text-gray-800"
                 >
                   Home
                 </Link>
@@ -125,7 +122,7 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/about"
-                  className="hover:text-[#ff7c5b] text-lg text-white"
+                  className="hover:text-[#ff7c5b] text-lg text-gray-800"
                 >
                   About Us
                 </Link>
@@ -133,29 +130,43 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/contact"
-                  className="hover:text-[#ff7c5b] text-lg text-white"
+                  className="hover:text-[#ff7c5b] text-lg text-gray-800"
                 >
                   Contact Us
                 </Link>
               </li>
             </>
-          )}
-          {isAdminLoggedIn && (
+          ) : (
             <>
               <li>
                 <Link
-                  to="/admin"
-                  className="hover:text-[#ff7c5b] text-lg text-white"
+                  to="/packages"
+                  className="hover:text-[#ff7c5b] text-lg text-gray-800"
                 >
-                  View All Packages
+                  Packages 
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/admin/dashboard/bookings"
-                  className="hover:text-[#ff7c5b] text-lg text-white"
+                  to="/contact"
+                  className="hover:text-[#ff7c5b] text-lg text-gray-800"
                 >
-                  Bookings
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/faq"
+                  className="hover:text-[#ff7c5b] text-lg text-gray-800"
+                >
+               Faqs
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/bookings"
+                  className="hover:text-[#ff7c5b] text-lg text-gray-800"
+                >Bookings
                 </Link>
               </li>
             </>
@@ -165,30 +176,63 @@ const Navbar = () => {
 
       {/* End Menu */}
       <div className="navbar-end">
-        {!isAdminLoggedIn && (
-          <Link
-            to="/admin/login"
-            className="btn bg-[#ff7c5b] text-white hover:bg-white hover:text-[#001337] text-lg"
-            style={{ minWidth: "120px", marginRight: "1.5rem" }}
+        {!isUserLoggedIn ? (
+          <button
+            className="btn bg-[#ff7c5b] text-white hover:bg-gray-800 hover:text-white text-lg"
+            style={{ minWidth: "120px" }}
           >
-            Admin Login
-          </Link>
-        )}
-        {isAdminLoggedIn && (
-          <div className="flex items-center">
-            <span
-              className="btn bg-white text-[#001337] hover:bg-[#ff7c5b] hover:text-white text-lg"
-              style={{ minWidth: "120px", marginRight: "1.5rem" }}
-            >
-              ADMIN DASHBOARD
+            <span>
+              <LiaPrayingHandsSolid className="inline-block w-5 h-5 mr-2 align-middle" />
+              Welcome
             </span>
+          </button>
+        ) : (
+          <div className="flex items-center">
             <button
-              onClick={handleLogout}
-              className="btn bg-[#ff7c5b] text-white hover:bg-white hover:text-[#001337] hidden sm:block text-lg"
-              style={{ minWidth: "120px", marginRight: "1.5rem" }}
+              className="btn bg-[#ff7c5b] text-white hover:bg-gray-800 hover:text-white mr-4 text-lg"
+              style={{ minWidth: "120px" }}
             >
-              Logout
+              <span>
+                <MdWavingHand className="inline-block w-5 h-5 mr-2 align-middle" />
+                {username}
+              </span>
             </button>
+
+            {profileImage && (
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
+                >
+                  <div className="w-10 rounded-full border border-gray-300">
+                    <img
+                      alt="Profile"
+                      src={profileImage}
+                      className="w-full h-full object-cover rounded-full"
+                    />
+                  </div>
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content bg-white text-gray-800 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                >
+                  <li>
+                    <Link to="/profile" className="justify-between">
+                      Profile
+                    </Link>
+                  </li>
+                  {/* <li>
+                    <Link to="/settings">Settings</Link>
+                  </li> */}
+                  <li>
+                    <button onClick={handleLogout} className="text-red-500">
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         )}
       </div>

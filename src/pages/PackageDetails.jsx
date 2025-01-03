@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-
+import { useApi } from "../context/ApiContext";
 const PackageDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [packageData, setPackageData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const api = useApi();
 
   const defaultImage =
     "https://images.pexels.com/photos/457882/pexels-photo-457882.jpeg"; // Fallback image
@@ -14,9 +15,12 @@ const PackageDetails = () => {
   useEffect(() => {
     const fetchPackageDetails = async () => {
       try {
-        const response = await axios.get(
-          `http://the-inceptioners-backend.vercel.app/api/packages/${id}`
+        const response = await api.get(
+          //`http://the-inceptioners-backend.vercel.app/api/packages/${id}`
+          `/packages/${id}`
+
         );
+       
         setPackageData(response.data);
       } catch (error) {
         console.error("Error fetching package details:", error);
