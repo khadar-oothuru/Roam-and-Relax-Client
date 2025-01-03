@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import userimg from "../../assets/Admin.jpg";
+import { FaUser, FaEnvelope, FaLock, FaImage } from "react-icons/fa";
+import userimg from "../../assets/Signup.png";
 import { useApi } from "../../context/ApiContext";
 
 const SignUp = () => {
@@ -49,55 +50,64 @@ const SignUp = () => {
 
   return (
     <div className="flex items-center justify-center h-screen bg-[#f0f4f8]">
-      <div className="flex items-center justify-center space-x-6 w-full max-w-4xl p-6 bg-white rounded-lg shadow-lg">
-        {/* Image Section */}
-        <div className="hidden md:block w-[45%]">
-          <img
-            src={userimg}
-            alt="Signup"
-            className="w-full h-auto rounded-lg object-cover"
-          />
-        </div>
-
+      <div className="flex flex-col sm:flex-row items-center justify-center w-full max-w-4xl p-6 bg-white rounded-lg shadow-lg space-y-6 sm:space-y-0 sm:space-x-6">
         {/* Form Section */}
-        <form onSubmit={handleSubmit} className="space-y-6 w-full sm:w-[400px]">
-          <h1 className="text-2xl font-bold text-[#001337] text-center">
-            User Signup
-          </h1>
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            className="w-full border p-4 rounded-lg bg-[#f7fafc] focus:outline-none focus:ring-2 focus:ring-[#001337] focus:border-[#001337]"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            className="w-full border p-4 rounded-lg bg-[#f7fafc] focus:outline-none focus:ring-2 focus:ring-[#001337] focus:border-[#001337]"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            className="w-full border p-4 rounded-lg bg-[#f7fafc] focus:outline-none focus:ring-2 focus:ring-[#001337] focus:border-[#001337]"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="file"
-            name="profileImage"
-            onChange={handleFileChange}
-            className="w-full p-4 rounded-lg bg-[#f7fafc]"
-            required
-          />
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 w-full sm:w-[60%] text-center"
+        >
+          <h1 className="text-2xl font-bold text-[#001337]"> Signup</h1>
+          {/* Username Input */}
+          <div className="relative">
+            <FaUser className="absolute left-4 top-4 text-gray-400" />
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              className="w-full pl-12 border p-3 rounded-lg bg-[#f7fafc] focus:outline-none focus:ring-2 focus:ring-[#001337]"
+              onChange={handleChange}
+              required
+            />
+          </div>
+          {/* Email Input */}
+          <div className="relative">
+            <FaEnvelope className="absolute left-4 top-4 text-gray-400" />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              className="w-full pl-12 border p-3 rounded-lg bg-[#f7fafc] focus:outline-none focus:ring-2 focus:ring-[#001337]"
+              onChange={handleChange}
+              required
+            />
+          </div>
+          {/* Password Input */}
+          <div className="relative">
+            <FaLock className="absolute left-4 top-4 text-gray-400" />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              className="w-full pl-12 border p-3 rounded-lg bg-[#f7fafc] focus:outline-none focus:ring-2 focus:ring-[#001337]"
+              onChange={handleChange}
+              required
+            />
+          </div>
+          {/* File Input */}
+          <div className="relative">
+            <FaImage className="absolute left-4 top-4 text-gray-400" />
+            <input
+              type="file"
+              name="profileImage"
+              className="w-full pl-12 border p-3 rounded-lg bg-[#f7fafc]"
+              onChange={handleFileChange}
+              required
+            />
+          </div>
+          {/* Signup Button */}
           <button
             type="submit"
-            className="w-full bg-[#001337] text-white py-3 rounded-lg hover:bg-[#ff7c5b] transition-all"
+            className="w-full bg-[#001337] text-white py-2 rounded-lg hover:bg-[#ff7c5b] transition-all"
           >
             Signup
           </button>
@@ -108,6 +118,15 @@ const SignUp = () => {
             </Link>
           </p>
         </form>
+
+        {/* Image Section */}
+        <div className="w-full sm:w-[50%]">
+          <img
+            src={userimg}
+            alt="Signup"
+            className="w-full h-auto rounded-lg object-cover"
+          />
+        </div>
       </div>
     </div>
   );

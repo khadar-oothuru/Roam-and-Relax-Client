@@ -3,7 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useApi } from "../../context/ApiContext";
 import { UserContext } from "../../context/UserContext"; // Import UserContext
-import userimg from "../../assets/Admin.jpg";
+import { FaEnvelope, FaLock } from "react-icons/fa";
+import { AiOutlineLogin } from "react-icons/ai";
+import userimg from "../../assets/Login.png";
 import Cookies from "js-cookie";
 
 const Login = () => {
@@ -36,6 +38,7 @@ const Login = () => {
   return (
     <div className="flex items-center justify-center h-screen bg-[#f0f4f8]">
       <div className="flex items-center justify-center space-x-6 w-full max-w-4xl p-6 bg-white rounded-lg shadow-lg">
+        {/* Left Image Section */}
         <div className="hidden md:block w-[45%]">
           <img
             src={userimg}
@@ -43,30 +46,50 @@ const Login = () => {
             className="w-full h-auto rounded-lg object-cover"
           />
         </div>
-        <form onSubmit={handleSubmit} className="space-y-6 w-full sm:w-[400px]">
-          <h1 className="text-2xl font-bold text-[#001337] text-center">User Login</h1>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            className="w-full border p-4 rounded-lg bg-[#f7fafc] focus:outline-none focus:ring-2 focus:ring-[#001337]"
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            className="w-full border p-4 rounded-lg bg-[#f7fafc] focus:outline-none focus:ring-2 focus:ring-[#001337]"
-            onChange={handleChange}
-            required
-          />
+
+        {/* Login Form */}
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-6 w-full sm:w-[400px] text-center"
+        >
+          <h1 className="text-2xl font-bold text-[#001337]">User Login</h1>
+
+          {/* Email Input */}
+          <div className="relative">
+            <FaEnvelope className="absolute left-4 top-4 text-gray-400" />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              className="w-full pl-12 border p-4 rounded-lg bg-[#f7fafc] focus:outline-none focus:ring-2 focus:ring-[#001337]"
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          {/* Password Input */}
+          <div className="relative">
+            <FaLock className="absolute left-4 top-4 text-gray-400" />
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              className="w-full pl-12 border p-4 rounded-lg bg-[#f7fafc] focus:outline-none focus:ring-2 focus:ring-[#001337]"
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          {/* Login Button */}
           <button
             type="submit"
-            className="w-full bg-[#001337] text-white py-3 rounded-lg hover:bg-[#ff7c5b] transition-all"
+            className="w-full flex items-center justify-center space-x-2 bg-[#001337] text-white py-3 rounded-lg hover:bg-[#ff7c5b] transition-all"
           >
-            Login
+            <AiOutlineLogin />
+            <span>Login</span>
           </button>
+
+          {/* Signup Link */}
           <p className="text-center text-sm text-gray-600">
             New user?{" "}
             <Link to="/signup" className="text-[#001337] hover:underline">

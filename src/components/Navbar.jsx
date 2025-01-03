@@ -20,7 +20,7 @@ const Navbar = () => {
 
   return (
     <div
-      className="navbar bg-white shadow-md px-20 py-3 sticky top-0 z-50"
+      className="navbar bg-white shadow-md px-5 py-3 sticky top-0 z-50"
       style={{ height: "4rem" }}
     >
       <div className="navbar-start">
