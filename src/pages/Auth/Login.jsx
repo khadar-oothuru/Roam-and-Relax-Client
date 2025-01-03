@@ -52,7 +52,7 @@ const Login = () => {
           onSubmit={handleSubmit}
           className="space-y-6 w-full text-center md:w-[400px]"
         >
-          <h1 className="text-2xl font-bold text-[#001337]">User Login</h1>
+          <h1 className="text-2xl font-bold text-[#001337]">Login</h1>
 
           {/* Email Input */}
           <div className="relative">
