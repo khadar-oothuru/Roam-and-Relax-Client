@@ -26,7 +26,7 @@ import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import AddPackage from "./pages/Admin/AddPackage";
 import UpdatePackage from "./pages/Admin/UpdatePackage";
-import SignUp from "./pages/Auth/signup";
+import SignUp from "./pages/Auth/SignUp";
 import Login from "./pages/Auth/Login";
 import User from "./pages/user";
 import { ToastContainer } from "react-toastify";
