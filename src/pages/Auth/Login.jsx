@@ -5,7 +5,7 @@ import { useApi } from "../../context/ApiContext";
 import { UserContext } from "../../context/UserContext"; // Import UserContext
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { AiOutlineLogin } from "react-icons/ai";
-import userimg from "../../assets/Login.png";
+import userimg from "../../assets/login.png";
 import Cookies from "js-cookie";
 
 const Login = () => {
@@ -37,9 +37,9 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center h-screen bg-[#f0f4f8]">
-      <div className="flex items-center justify-center space-x-6 w-full max-w-4xl p-6 bg-white rounded-lg shadow-lg">
-        {/* Left Image Section */}
-        <div className="hidden md:block w-[45%]">
+      <div className="flex flex-col-reverse md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-6 w-full max-w-4xl p-6 bg-white rounded-lg shadow-lg">
+        {/* Image Section */}
+        <div className="w-full md:w-[45%] mb-6 md:mb-0">
           <img
             src={userimg}
             alt="Login"
@@ -50,7 +50,7 @@ const Login = () => {
         {/* Login Form */}
         <form
           onSubmit={handleSubmit}
-          className="space-y-6 w-full sm:w-[400px] text-center"
+          className="space-y-6 w-full text-center md:w-[400px]"
         >
           <h1 className="text-2xl font-bold text-[#001337]">User Login</h1>
 
