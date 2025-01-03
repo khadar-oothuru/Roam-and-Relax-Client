@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import userimg from "../../assets/admin.jpg";
+import userimg from "../../assets/Admin.jpg";
 import { useApi } from "../../context/ApiContext";
 
 const SignUp = () => {
