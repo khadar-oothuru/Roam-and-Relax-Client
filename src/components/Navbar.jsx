@@ -99,10 +99,11 @@ const Navbar = () => {
         {/* Logo */}
         <Link
           to="/"
-          className="text-lg font-bold permanent-marker-regular text-gray-800"
+          className=" hidden md:block text-md font-bold permanent-marker-regular text-gray-800 permanent-marker-regular "
         >
-          <span>Roam</span> <span className="text-[#ff7c5b]">&</span>{" "}
-          <span>Relax</span>
+          <span className="text-[#ff7c5b]">Roam</span>
+          <span className="text-">&</span>
+          <span className="text-[#ff7c5b]">Relax</span>
         </Link>
       </div>
 
@@ -143,7 +144,7 @@ const Navbar = () => {
                   to="/packages"
                   className="hover:text-[#ff7c5b] text-lg text-gray-800"
                 >
-                  Packages 
+                  Packages
                 </Link>
               </li>
               <li>
@@ -159,14 +160,15 @@ const Navbar = () => {
                   to="/faq"
                   className="hover:text-[#ff7c5b] text-lg text-gray-800"
                 >
-               Faqs
+                  Faqs
                 </Link>
               </li>
               <li>
                 <Link
                   to="/bookings"
                   className="hover:text-[#ff7c5b] text-lg text-gray-800"
-                >Bookings
+                >
+                  Bookings
                 </Link>
               </li>
             </>
