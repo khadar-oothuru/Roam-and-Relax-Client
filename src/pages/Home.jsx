@@ -49,7 +49,9 @@ const HomePage = () => {
     const interval = setInterval(() => {
       setIsFading(true);
       setTimeout(() => {
-        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % carouselItems.length);
+        setCurrentImageIndex(
+          (prevIndex) => (prevIndex + 1) % carouselItems.length
+        );
         setIsFading(false);
       }, 500);
     }, 3000);
@@ -65,10 +67,15 @@ const HomePage = () => {
           style={{ backgroundImage: `url(${hero})` }}
         ></div>
         <div className="w-full md:w-1/2 h-1/2 md:h-full bg-white flex flex-col items-center md:items-start justify-center px-4 md:px-8 space-y-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-[#001337] text-center md:text-left">TIME TO TRAVEL</h1>
-          <h2 className="text-xl md:text-2xl text-gray-600 text-center md:text-left">ARE YOU READY?</h2>
+          <h1 className="text-3xl md:text-4xl font-bold text-[#001337] text-center md:text-left">
+            TIME TO TRAVEL
+          </h1>
+          <h2 className="text-xl md:text-2xl text-gray-600 text-center md:text-left">
+            ARE YOU READY?
+          </h2>
           <p className="text-gray-500 text-center md:text-left">
-            Embark on an unforgettable journey filled with adventure, relaxation, and endless opportunities to explore.
+            Embark on an unforgettable journey filled with adventure,
+            relaxation, and endless opportunities to explore.
           </p>
           <div className="flex flex-wrap justify-center md:justify-start gap-4">
             <Link
@@ -99,29 +106,24 @@ const HomePage = () => {
           backgroundImage: `url(${carouselItems[currentImageIndex].image})`,
         }}
       ></div>
-      <div className="absolute inset-0 flex flex-col md:flex-row items-center justify-center text-center md:text-left px-6">
-        <div className="md:w-1/2 flex flex-col items-center md:items-start justify-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-white trade-winds-regular mb-4 md:mb-6">
-            {carouselItems[currentImageIndex].heading}
-          </h1>
-          <p className="text-sm md:text-lg text-white opacity-80 mb-4 md:mb-8">
-            {carouselItems[currentImageIndex].tagline}
-          </p>
-          <div className="relative">
-            <button
-              className="btn bg-[#001337] text-white hover:bg-[#ff7c5b] hover:scale-105 text-sm md:text-lg px-4 md:px-8 py-2 rounded-lg flex items-center justify-center h-12 transition-transform duration-300 z-20 relative"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            >
-              <MdOutlineTravelExplore className="mr-1 w-6 md:w-10" />
-              <Link to="/packages">Explore Packages</Link>
-            </button>
-          </div>
-        </div>
-        <div
-          className="hidden md:block md:w-1/2 h-full bg-cover bg-center"
-          style={{ backgroundImage: `url(${carouselItems[currentImageIndex].image})` }}
-        ></div>
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white trade-winds-regular mb-4">
+          {carouselItems[currentImageIndex].heading}
+        </h1>
+        <p className="text-sm sm:text-base lg:text-lg text-white opacity-80 mb-6">
+          {carouselItems[currentImageIndex].tagline}
+        </p>
+        <Link
+          to="/packages"
+          className="btn bg-[#001337] text-white hover:bg-[#ff7c5b] hover:scale-105 px-8 py-2 rounded-lg flex items-center justify-center transition-transform duration-300"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <MdOutlineTravelExplore  className="h-4 w-4 sm:h-8 sm:w-8"/>
+          <span className="ml-0 text-lg lg:text-xl sm:text-md  font-semibold">
+            Explore Packages
+          </span>
+        </Link>
       </div>
     </div>
   );
