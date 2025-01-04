@@ -98,34 +98,47 @@ const HomePage = () => {
 
   return (
     <div className="relative h-screen overflow-hidden">
+    {/* Background Image */}
+    <div
+      className={`absolute inset-0 bg-cover bg-center transition-opacity duration-500 ${
+        isFading ? "opacity-50" : "opacity-100"
+      }`}
+      style={{
+        backgroundImage: `url(${carouselItems[currentImageIndex].image})`,
+      }}
+    >
+      {/* White/Dark Shade Effect */}
       <div
-        className={`absolute inset-0 bg-cover bg-center transition-opacity duration-500 ${
-          isFading ? "opacity-50" : "opacity-100"
+        className={`absolute inset-0 transition-opacity duration-300 ${
+          isHovered ? "bg-white opacity-20" : "bg-black opacity-0"
         }`}
-        style={{
-          backgroundImage: `url(${carouselItems[currentImageIndex].image})`,
-        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       ></div>
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white trade-winds-regular mb-4">
-          {carouselItems[currentImageIndex].heading}
-        </h1>
-        <p className="text-sm sm:text-base lg:text-lg text-white opacity-80 mb-6">
-          {carouselItems[currentImageIndex].tagline}
-        </p>
-        <Link
-          to="/packages"
-          className="btn bg-[#001337] text-white hover:bg-[#ff7c5b] hover:scale-105 px-8 py-2 rounded-lg flex items-center justify-center transition-transform duration-300"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <MdOutlineTravelExplore  className="h-4 w-4 sm:h-8 sm:w-8"/>
-          <span className="ml-0 text-lg lg:text-xl sm:text-md  font-semibold">
-            Explore Packages
-          </span>
-        </Link>
-      </div>
     </div>
+  
+    {/* Content */}
+    <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center">
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white trade-winds-regular mb-4">
+        {carouselItems[currentImageIndex].heading}
+      </h1>
+      <p className="text-sm sm:text-base lg:text-lg text-white opacity-80 mb-6">
+        {carouselItems[currentImageIndex].tagline}
+      </p>
+      <Link
+        to="/packages"
+        className="btn bg-[#001337] text-white hover:bg-[#ff7c5b] hover:scale-105 px-8 py-2 rounded-lg flex items-center justify-center transition-transform duration-300"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <MdOutlineTravelExplore className="h-4 w-4 sm:h-8 sm:w-8" />
+        <span className="ml-0 text-lg lg:text-xl sm:text-md font-semibold">
+          Explore Packages
+        </span>
+      </Link>
+    </div>
+  </div>
+  
   );
 };
 
