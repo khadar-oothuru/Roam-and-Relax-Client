@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { UserContext } from "../context/UserContext"; // Import UserContext
 import "react-toastify/dist/ReactToastify.css";
 
 const BookingForm = ({
@@ -20,6 +21,7 @@ const BookingForm = ({
   });
   const [loading, setLoading] = useState(false);
 
+  const { userId } = useContext(UserContext); // Access userId
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -38,8 +40,8 @@ const BookingForm = ({
 
     try {
       const response = await axios.post(
-        "https://the-inceptioners-backend.vercel.app/api/bookings",
-        { ...formData, packageId, totalPrice }
+        `http://localhost:4000/api/bookings`,
+        { ...formData, packageId, totalPrice, userId } // Include userId in the request
       );
 
       setFormData({
@@ -54,7 +56,6 @@ const BookingForm = ({
       toast.success("Booking successful!");
 
       setTimeout(() => {
-        // Ensure state is passed correctly when redirecting to the invoice page
         navigate("/invoice", {
           state: {
             booking: response.data.booking,
@@ -81,6 +82,9 @@ const BookingForm = ({
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Hidden input field for userId */}
+        <input type="hidden" name="userId" value={userId} />
+
         <input
           type="text"
           name="name"
@@ -105,8 +109,6 @@ const BookingForm = ({
           value={formData.phone}
           onChange={handleChange}
           placeholder="Your Phone Number"
-          // pattern="\d{10}"
-          title="Phone number must be a 10-digit number"
           required
           className="w-full p-3 border border-gray-300 rounded-md bg-gray-100 focus:ring-2 focus:ring-[#001337]"
         />
@@ -116,7 +118,6 @@ const BookingForm = ({
           value={formData.travelers}
           onChange={handleChange}
           placeholder="Number of Travelers"
-         
           required
           className="w-full p-3 border border-gray-300 rounded-md bg-gray-100 focus:ring-2 focus:ring-[#001337]"
         />

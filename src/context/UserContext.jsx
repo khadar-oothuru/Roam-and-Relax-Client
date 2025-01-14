@@ -5,9 +5,11 @@ export const UserContext = createContext(); // Add this line
 
 
 export const UserProvider = ({ children }) => {
+
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
   const [profileImage, setProfileImage] = useState("");
+  const [userId, setUserId] = useState(""); // New state for userId
 
   const updateUserState = (token) => {
     if (token) {
@@ -16,6 +18,7 @@ export const UserProvider = ({ children }) => {
         setIsUserLoggedIn(true);
         setUsername(decodedPayload.username || "Guest User");
         setProfileImage(decodedPayload.profileImage || "");
+        setUserId(decodedPayload.id || ""); // Extract userId from token
       } catch {
         logout();
       }
@@ -23,6 +26,7 @@ export const UserProvider = ({ children }) => {
       setIsUserLoggedIn(false);
       setUsername("");
       setProfileImage("");
+      setUserId(""); // Reset userId
     }
   };
 
@@ -37,7 +41,9 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ isUserLoggedIn, username, profileImage, logout, updateUserState }}>
+    <UserContext.Provider
+      value={{ isUserLoggedIn, username, profileImage, userId, logout, updateUserState }}
+    >
       {children}
     </UserContext.Provider>
   );
