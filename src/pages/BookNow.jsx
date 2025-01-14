@@ -13,7 +13,7 @@ const BookNow = () => {
     const fetchPackageDetails = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL} /api/packages/${id}`
+          `${import.meta.env.VITE_BACKEND_URL}/api/packages/${id}`
         );
         setPackageDetails(response.data);
         setLoading(false);
