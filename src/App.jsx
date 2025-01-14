@@ -33,6 +33,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MyBookings from "./components/MyBookings";
 
+import Faqs from "./pages/Faq/Faqs";
+
 // PrivateRoute Component for protecting routes
 const PrivateRoute = ({ children }) => {
   const { isUserLoggedIn } = useContext(UserContext); // Use useContext to access UserContext
@@ -100,6 +102,9 @@ function Layout() {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+
+
+        <Route path="/faq"  element={<Faqs />} />
 
         {/* Admin Routes */}
         <Route path="/admin/login" element={<AdminLogin />} />

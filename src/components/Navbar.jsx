@@ -180,7 +180,7 @@ const Navbar = () => {
       <div className="navbar-end">
         {!isUserLoggedIn ? (
           <button
-            className="btn bg-[#ff7c5b] text-white hover:bg-gray-800 hover:text-white text-lg"
+            className="btn bg-[#ff7c5b] text-white hover:bg-[#001337] hover:text-white text-lg"
             style={{ minWidth: "120px" }}
           >
             <span>
@@ -191,7 +191,7 @@ const Navbar = () => {
         ) : (
           <div className="flex items-center">
             <button
-              className="btn bg-[#ff7c5b] text-white hover:bg-gray-800 hover:text-white mr-4 text-lg"
+              className="btn bg-[#ff7c5b] text-white hover:bg-[#001337] hover:text-white mr-4 text-lg"
               style={{ minWidth: "120px" }}
             >
               <span>

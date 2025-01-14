@@ -40,7 +40,7 @@ const BookingForm = ({
 
     try {
       const response = await axios.post(
-        `http://localhost:4000/api/bookings`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/bookings`,
         { ...formData, packageId, totalPrice, userId } // Include userId in the request
       );
 

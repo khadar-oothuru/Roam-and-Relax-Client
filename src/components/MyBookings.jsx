@@ -37,7 +37,7 @@ const MyBookings = () => {
 
             try {
                 setLoading(true);
-                const response = await axios.get(`http://localhost:4000/api/bookings/${userId}`);
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/bookings/${userId}`);
                 setBookings(response.data.bookings || []);
             } catch (error) {
                 setError("Failed to fetch bookings. Please try again later.");
@@ -53,7 +53,7 @@ const MyBookings = () => {
     const handleCancelBooking = async (bookingId) => {
         try {
             setModalLoading(true);
-            await axios.delete(`http://localhost:4000/api/bookings/${bookingId}`);
+            await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/bookings/${bookingId}`);
             setBookings((prev) => prev.filter((booking) => booking._id !== bookingId));
             setSelectedBooking(null);
             toast.success("Booking canceled successfully!");
