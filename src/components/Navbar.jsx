@@ -1,12 +1,15 @@
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { MdWavingHand } from "react-icons/md";
 import { LiaPrayingHandsSolid } from "react-icons/lia";
+import ProfileModal from "./ProfileModal";
 
 const Navbar = () => {
   const { isUserLoggedIn, username, profileImage, logout } =
     useContext(UserContext);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -71,16 +74,35 @@ const Navbar = () => {
             ) : (
               <>
                 <li>
-                  <Link to="/profile" className="hover:text-[#ff7c5b] text-lg">
+                  <button
+                    className="hover:text-[#ff7c5b] text-lg"
+                    onClick={() => setIsModalOpen(true)}
+                  >
                     Profile
+                  </button>
+                  <ProfileModal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    username={username}
+                    profileImage={profileImage}
+                    email="user@example.com"
+                    onEdit={() => console.log("Edit button clicked")}
+                  />
+                </li>
+                <li>
+                  <Link
+                    to="/mybookings"
+                    className="hover:text-[#ff7c5b] text-lg"
+                  >
+                    My Bookings
                   </Link>
                 </li>
                 <li>
                   <Link
-                    to="/dashboard"
-                    className="hover:text-[#ff7c5b] text-lg"
+                    to="/faq"
+                    className="hover:text-[#ff7c5b] text-lg text-gray-800"
                   >
-                    Dashboard
+                    Faqs
                   </Link>
                 </li>
                 <li>
@@ -102,7 +124,7 @@ const Navbar = () => {
           className=" hidden md:block text-md font-bold permanent-marker-regular text-gray-800 permanent-marker-regular "
         >
           <span className="text-[#ff7c5b]">Roam</span>
-          <span className="text-">&</span>
+          <span className="text-[#001337]">&</span>
           <span className="text-[#ff7c5b]">Relax</span>
         </Link>
       </div>
@@ -168,7 +190,7 @@ const Navbar = () => {
                   to="/mybookings"
                   className="hover:text-[#ff7c5b] text-lg text-gray-800"
                 >
-                  Bookings
+                  My Bookings
                 </Link>
               </li>
             </>
@@ -219,16 +241,32 @@ const Navbar = () => {
                   tabIndex={0}
                   className="menu menu-sm dropdown-content bg-white text-gray-800 rounded-box z-[1] mt-3 w-52 p-2 shadow"
                 >
+                  {/* Profile button */}
                   <li>
-                    <Link to="/profile" className="justify-between">
+                    <button
+                      className="justify-between w-full text-left px-4 py-2 hover:bg-gray-100 rounded"
+                      onClick={() => setIsModalOpen(true)}
+                    >
                       Profile
-                    </Link>
+                    </button>
                   </li>
-                  {/* <li>
-                    <Link to="/settings">Settings</Link>
-                  </li> */}
+
+                  {/* Profile Modal */}
+                  <ProfileModal
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    username={username}
+                    profileImage={profileImage}
+                    email="user@example.com"
+                    onEdit={() => console.log("Edit button clicked")}
+                  />
+
+                  {/* Logout button */}
                   <li>
-                    <button onClick={handleLogout} className="text-red-500">
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left text-red-500 px-4 py-2 hover:bg-gray-100 rounded"
+                    >
                       Logout
                     </button>
                   </li>
