@@ -31,6 +31,7 @@ import Login from "./pages/Auth/Login";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MyBookings from "./components/MyBookings";
 
 // PrivateRoute Component for protecting routes
 const PrivateRoute = ({ children }) => {
@@ -79,6 +80,15 @@ function Layout() {
         />
 
         <Route
+          path="/mybookings"
+          element={
+            <PrivateRoute>
+              <MyBookings />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
           path="/packages/:id/booknow"
           element={
             <PrivateRoute>
@@ -90,7 +100,6 @@ function Layout() {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-      
 
         {/* Admin Routes */}
         <Route path="/admin/login" element={<AdminLogin />} />

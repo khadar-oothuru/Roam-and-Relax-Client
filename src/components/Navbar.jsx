@@ -165,7 +165,7 @@ const Navbar = () => {
               </li>
               <li>
                 <Link
-                  to="/bookings"
+                  to="/mybookings"
                   className="hover:text-[#ff7c5b] text-lg text-gray-800"
                 >
                   Bookings
