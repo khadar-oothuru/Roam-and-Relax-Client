@@ -48,6 +48,8 @@ const AboutUs = () => {
             Contact for more details
           </button>
         </Link>
+
+      
       </div>
     </div>
   );

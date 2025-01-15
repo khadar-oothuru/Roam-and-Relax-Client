@@ -22,9 +22,9 @@ const FaqSpeak = () => {
       </h1>
       <div className="flex space-x-6">
         {/* Button 1: Orange Theme */}
-        <button className="flex items-center space-x-2 bg-[#ff7c5b] text-white py-3 px-6 rounded-md border border-transparent hover:bg-white hover:text-[#ff7c5b] hover:border-[#ff7c5b] transition-colors">
+        <Link to="/speak" className="flex items-center space-x-2 bg-[#ff7c5b] text-white py-3 px-6 rounded-md border border-transparent hover:bg-white hover:text-[#ff7c5b] hover:border-[#ff7c5b] transition-colors">
           <FaTeamspeak size={24} /> <span>Speak With Us</span>
-        </button>
+        </Link>
 
         {/* Button 2: Blue Theme */}
         <Link to="/contact">

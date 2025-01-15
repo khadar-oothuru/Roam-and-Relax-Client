@@ -20,7 +20,6 @@ const MyBookings = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [modalLoading, setModalLoading] = useState(false); // Loading state for cancel action
-
     useEffect(() => {
         const fetchBookings = async () => {
             if (!isUserLoggedIn) {
@@ -28,17 +27,22 @@ const MyBookings = () => {
                 setLoading(false);
                 return;
             }
-
+    
             if (!userId) {
                 setError("User ID is not available.");
                 setLoading(false);
                 return;
             }
-
+    
             try {
                 setLoading(true);
                 const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/bookings/${userId}`);
-                setBookings(response.data.bookings || []);
+                const fetchedBookings = response.data.bookings || []; // Default to an empty array
+                setBookings(fetchedBookings);
+                if (fetchedBookings.length === 0) {
+                    // No bookings, but this is not an error
+                    setError(null); // Clear any previous errors
+                }
             } catch (error) {
                 setError("Failed to fetch bookings. Please try again later.");
                 console.error("Error fetching bookings:", error);
@@ -46,9 +50,10 @@ const MyBookings = () => {
                 setLoading(false);
             }
         };
-
+    
         fetchBookings();
     }, [userId, isUserLoggedIn]);
+    
 
     const handleCancelBooking = async (bookingId) => {
         try {

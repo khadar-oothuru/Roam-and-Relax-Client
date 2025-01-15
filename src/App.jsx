@@ -34,6 +34,7 @@ import "react-toastify/dist/ReactToastify.css";
 import MyBookings from "./components/MyBookings";
 
 import Faqs from "./pages/Faq/Faqs";
+import SpeakWithUs from "./pages/Faq/SpeakWithUs";
 
 // PrivateRoute Component for protecting routes
 const PrivateRoute = ({ children }) => {
@@ -105,6 +106,7 @@ function Layout() {
 
 
         <Route path="/faq"  element={<Faqs />} />
+        <Route path="/speak"  element={<SpeakWithUs />} />
 
         {/* Admin Routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
@@ -133,6 +135,7 @@ function App() {
           </Router>
         </ApiProvider>
       </UserProvider>
+      
     </AdminProvider>
   );
 }
