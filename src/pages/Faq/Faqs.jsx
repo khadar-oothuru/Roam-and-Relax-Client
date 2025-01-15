@@ -13,7 +13,7 @@ const Faqs = () => {
       <div className="faq_page mx-auto flex flex-col items-center  bg-slate-50">
         {" "}
         {/* Add bg-slate-50 here */}
-        <div className="faq_top bg-gradient-to-b from-[#ECF4F6] to-[#FBFCFD] w-full h-[520px] flex items-center justify-center">
+        <div className="faq_top bg-gradient-to-b from-[#ccf2fc] to-[#f6f9fb] w-full h-[520px] flex items-center justify-center">
           <motion.div
             ref={ref}
             initial={{ y: 100, opacity: 0 }}
