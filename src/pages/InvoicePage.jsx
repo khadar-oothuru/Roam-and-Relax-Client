@@ -40,6 +40,11 @@ const InvoicePage = () => {
       // Set the state to indicate the invoice has been downloaded
       setIsInvoiceDownloaded(true);
       toast.success("Invoice downloaded successfully!");
+
+
+
+        //<input type="hidden" name="redirect" value="https://yourwebsite.com/thanks.html">
+
     } catch (error) {
       toast.error("Failed to download invoice.");
       console.error("PDF Error:", error);
