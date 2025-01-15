@@ -108,7 +108,7 @@ const MyBookings = () => {
                 <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
                     <div className="bg-white p-6 rounded-lg w-11/12 md:w-1/2 shadow-lg relative">
                         <button
-                            className="absolute top-2 right-2 text-red-500 font-bold text-lg"
+                            className="absolute top-4 right-5 text-red-500 font-bold text-lg"
                             onClick={() => setSelectedBooking(null)}
                         >
                             X
